@@ -11,7 +11,7 @@ class SigninPostUser extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,20 @@ class SigninPostUser extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "email" => "required|email|exists:users",
+            "password" => "required",
         ];
     }
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'email' => strtolower($this->email),
+        ]);
+    }
+
 }
