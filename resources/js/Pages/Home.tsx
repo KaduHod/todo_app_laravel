@@ -9,7 +9,7 @@ export default function Login() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        post('/login');
+        post('/signin');
     };
 
     return (
