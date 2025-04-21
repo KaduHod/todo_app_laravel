@@ -1,0 +1,37 @@
+services:
+  yii:
+    build: .
+    volumes:
+      - ./:/var/www/html/todo
+    ports:
+      - "8080:80"
+      - "5173:5173"
+    depends_on:
+      - postgres
+    hostname: laravel-app
+    container_name: laravel-app
+    networks:
+      - todo_network
+
+  postgres:
+    image: postgres
+    container_name: laravel-db
+    hostname: laravel-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qN6m39doREM4O7YBBy
+      POSTGRES_DB: postgres  # Nome do banco de dados, pode ser alterado conforme necessário
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./infra/database/dump.sql:/docker-entrypoint-initdb.d/dump.sql  # Mapeia o dump para o diretório de inicialização
+    networks:
+      - todo_network
+
+volumes:
+  pgdata:
+
+networks:
+  todo_network:
+    driver: bridge
