@@ -9,8 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 Route::middleware("auth")->group(function() {
     Route::get("/dashboard", function() {
+
         return Inertia::render("Dashboard");
     })->name("dashboard");
+    Route::post("/logout", function() {
+        Auth::logout();
+        return redirect("/");
+    });
 });
 Route::middleware("guest")->group(function() {
     Route::get('/', function () {
