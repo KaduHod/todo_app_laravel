@@ -38,6 +38,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onToggleComplete }) => {
                         </div>
                         <div>
                             <TaskForm task={task}/>
+
                          </div>
                     </div>
                 </div>

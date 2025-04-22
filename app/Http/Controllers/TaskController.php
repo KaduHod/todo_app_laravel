@@ -35,4 +35,11 @@ class TaskController extends Controller
         $task->save();
         return to_route("dashboard");
     }
+    public function deleteTask($id) {
+        $task = Task::find($id);
+        if($task && $task->user_id === Auth::id()) {
+            $task->delete();
+        }
+        return to_route("dashboard");
+    }
 }

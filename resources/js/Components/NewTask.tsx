@@ -14,6 +14,7 @@ export default function NewTask() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         post("/tasks");
+        setOpen(!open)
     };
 
     return (

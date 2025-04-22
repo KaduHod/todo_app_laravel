@@ -14,6 +14,7 @@ Route::permanentRedirect('/login', '/')->name("login");
 Route::middleware("auth")->group(function() {
     Route::post("/tasks", [TaskController::class, "postTask"])->name("tasks");
     Route::put("/tasks/{id}", [TaskController::class, "editTask"])->name("tasks");
+    Route::delete("/tasks/{id}", [TaskController::class, "deleteTask"])->name("tasks");
     Route::get("/dashboard", [TaskController::class, "dashboard"])->name("dashboard");
     Route::post("/logout", [AuthController::class, "logout"]);
 });

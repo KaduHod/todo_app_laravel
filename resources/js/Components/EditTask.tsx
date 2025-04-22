@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "@inertiajs/react";
 import { Task } from "../types";
 
-const TaskForm: React.FC<{task: Task}> = ({task}) => {
+const TaskForm: React.FC<{ task: Task }> = ({ task }) => {
     const [open, setOpen] = useState(false);
     const { data, setData, submit, processing, errors } = useForm<Task>({
         id: task.id,
@@ -13,18 +13,29 @@ const TaskForm: React.FC<{task: Task}> = ({task}) => {
     });
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        submit({method: "put" ,url: `tasks/${task.id}`});
+        submit({ method: "put", url: `tasks/${task.id}` });
         setOpen(!open);
+    };
+    const handleDelete = (e: React.FormEvent) => {
+        e.preventDefault();
+        submit({ method: "delete", url: `tasks/${task.id}` });
     };
 
     return (
         <>
-            <button
-                onClick={() => setOpen(!open)}
-                className="text-white px-4 py-2 rounded hover:cursor-pointer"
-            >
-                ✏️
-            </button>
+            <div className="flex">
+                <button
+                    onClick={() => setOpen(!open)}
+                    className="text-white px-4 py-2 rounded hover:cursor-pointer"
+                >
+                    ✏️
+                </button>
+                <form onSubmit={handleDelete}>
+                    <button type="submit" className="text-white px-4 py-2 rounded hover:cursor-pointer">
+                        🗑️
+                    </button>
+                </form>
+            </div>
             {open && (
                 <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-start justify-center pt-20 z-50">
                     <form
@@ -97,7 +108,7 @@ const TaskForm: React.FC<{task: Task}> = ({task}) => {
                             </label>
                             <input
                                 type="date"
-                                value={data.due_date.split(' ')[0]}
+                                value={data.due_date.split(" ")[0]}
                                 onChange={(e) =>
                                     setData("due_date", e.target.value)
                                 }
