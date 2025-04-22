@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "@inertiajs/react";
-import { Task } from "./Tasks";
+import { Task } from "../types";
 
 export default function NewTask() {
     const [ open, setOpen ] = useState(false);

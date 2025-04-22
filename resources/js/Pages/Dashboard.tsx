@@ -1,8 +1,9 @@
 import React from "react";
 import { usePage } from "@inertiajs/react";
 import Header from "../Components/Header";
-import TaskList, { Task } from "../Components/Tasks";
+import TaskList from "../Components/Tasks";
 import NewTask from "../Components/NewTask";
+import { Task } from "../types";
 
 export default function Dashboard() {
     const { tasks } = usePage<{ tasks: Task[] }>().props;
